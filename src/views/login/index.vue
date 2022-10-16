@@ -1,16 +1,17 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <div>
+    <div class="login-box">
         <el-card class="login-card">
             <!-- header是card组件提供的插槽名字 -->
             <template v-slot:header>
                 <span>黑马面经运营后台</span>
             </template>
             <div>
-                <el-form label-position="top" label-width="80px" :model="user">
-                    <el-form-item label="用户名">
+                <el-form label-position="top" label-width="80px" :model="user" :rules="rules" ref="form">
+                    <el-form-item label="用户名" prop="username">
                         <el-input v-model="user.username"></el-input>
                     </el-form-item>
-                    <el-form-item label="密码">
+                    <el-form-item label="密码" prop="password">
                         <el-input v-model="user.password"></el-input>
                     </el-form-item>
                 </el-form>
@@ -22,7 +23,7 @@
                     <!-- size: 设置按钮大小的属性
           type：设置按钮类型的属性，primary表示主要按钮
            -->
-                    <el-button type="primary" size="small">登录</el-button>
+                    <el-button type="primary" size="small" @click="login">登录</el-button>
                     <el-button size="small">重置</el-button>
                 </el-row>
             </div>
@@ -30,7 +31,7 @@
     </div>
 </template>
 <script>
-import '@/styles/index.scss'
+import { login } from '@/api/user'
 export default {
     data() {
         return {
@@ -38,19 +39,55 @@ export default {
             user: {
                 username: '',
                 password: ''
+            },
+            rules: {
+                username: [
+                    // required 表示是否为必填项，true表示必填；message: 设置校验不通过的提示语，
+                    // trigger设置校验时机，blur表示失去焦点的时候进行校验
+                    { required: true, message: '请输入用户名', trigger: 'blur' }
+                ],
+                password: [
+                    { required: true, message: '请输入密码', trigger: 'blur' }
+                ]
             }
+        }
+    },
+    methods: {
+        // 登录
+        login() {
+            // validate是form表单用于校验整个表单规则的方法
+            this.$refs.form.validate(async (bool) => {
+                // bool值为true表示校验通过，否则校验失败!
+
+                if (bool) {
+                    // console.log(res);
+                    const res = await login(this.user)
+                    this.$store.commit('user/set_Token', res.data.data.token)
+                    // console.log(78, res)
+                    // 成功跳转到首页
+                    // 失败提示用户 --- 统一响应拦截器中封装
+                } else {
+                    console.log('校验不通过')
+                }
+            })
         }
     }
 }
 </script>
 <style lang="scss" scoped>
-// scss和less一样都是css预处理器，都有嵌套语法
+// scss和less一样都是css预处理器，都有嵌套语法\
+.login-box {
+    background: url('@/assets/login-bg.svg') no-repeat center center;
+    background-size: 150%;
+    height: 100vh;
+}
+
 .login-card {
     // margin: 0 auto;
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50%;
+    width: 40%;
     transform: translate(-50%, -50%);
 
     /**
