@@ -40,7 +40,8 @@
                         </el-popover>
                     </el-row>
                 </el-header>
-                <!-- 主题内容 -->
+
+
                 <el-main>
                     <router-view> </router-view>
                 </el-main>
@@ -52,6 +53,8 @@
 import { removeToken } from '@/utils/token'
 import { getUserInfo } from '@/api/user'
 import store from '@/store'
+import { Message } from 'element-ui'
+
 export default {
     data() {
         return {
@@ -69,6 +72,7 @@ export default {
     async created() {
         const res = await getUserInfo()
         console.log(res);
+        Message.success('登录成功')
         this.user = res.data.data
     }
 
@@ -94,5 +98,10 @@ export default {
 
 .username {
     margin: 0 8px;
+}
+
+.el-header {
+    display: flex;
+    justify-content: end;
 }
 </style>

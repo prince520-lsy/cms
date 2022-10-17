@@ -27,6 +27,8 @@
 <script>
 import { login } from '@/api/user'
 import { getUserInfo } from '@/api/user'
+import { Message } from 'element-ui'
+
 export default {
     data() {
         return {
@@ -55,7 +57,8 @@ export default {
                 // bool值为true表示校验通过，否则校验失败!
                 if (bool) {
                     const res = await login(this.user)
-                    console.log(res, this);
+                    console.log(60, res);
+
                     this.$store.commit('user/SET_TOKEN',
                         res.data.data.token)
                     this.$router.push('/')
