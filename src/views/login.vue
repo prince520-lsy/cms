@@ -29,6 +29,7 @@
 </template>
 <script>
 import { login } from '@/api/user'
+// import { getUserInfo } from '@/api/user'
 export default {
     data() {
         return {
@@ -39,8 +40,7 @@ export default {
             },
             rules: {
                 username: [
-                    // required 表示是否为必填项，true表示必填；message: 设置校验不通过的提示语，
-                    // trigger设置校验时机，blur表示失去焦点的时候进行校验
+
                     { required: true, message: '请输入用户名', trigger: 'blur' }
                 ],
                 password: [
@@ -49,6 +49,8 @@ export default {
             }
         }
     },
+
+
     methods: {
         // 登录
         login(formname) {
@@ -60,7 +62,7 @@ export default {
                     console.log(res, this);
                     this.$store.commit('user/SET_TOKEN',
                         res.data.data.token)
-
+                    this.$router.push('/')
                 } else {
                     console.log('校验不通过')
                 }

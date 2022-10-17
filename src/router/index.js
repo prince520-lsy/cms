@@ -1,7 +1,7 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import Index from '../views/index.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -12,10 +12,24 @@ const routes = [
     component: () => import('../views/login.vue')
   },
   {
-    path: '/index',
-    name: 'index',
-    component: () => import('../views/index.vue')
-  }
+    path: '/',
+    // name: 'index',
+    component: Index,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        name: 'dashboard',
+        component: () => import('@/views/dashboard.vue')
+      },
+      {
+        path: 'article',
+        name: 'article',
+        component: () => import('@/views/article.vue')
+      }
+    ]
+  },
+
 
 ]
 
