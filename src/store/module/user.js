@@ -1,6 +1,6 @@
 
 // 用户保存用户相关信息的vuex模块
-import { setToken, getToken } from '@/utils/auth'
+import { setToken, getToken, removeToken } from '@/utils/auth'
 const state = {
     token: getToken() // 刷新浏览器的时候重新从缓存中获取
 }
@@ -10,6 +10,10 @@ const mutations = {
         state.token = token
         // 保存token 数据持久化
         setToken(token)
+    },
+    remove_token(state, token) {
+        state.token = ""
+        removeToken(token)
     }
 }
 export default {

@@ -17,9 +17,6 @@
                 </el-form>
 
                 <el-row type="flex" justify="center">
-                    <!-- size: 设置按钮大小的属性
-          type：设置按钮类型的属性，primary表示主要按钮
-           -->
                     <el-button type="primary" size="small" @click="login">登录</el-button>
                     <el-button size="small">重置</el-button>
                 </el-row>
@@ -29,11 +26,10 @@
 </template>
 <script>
 import { login } from '@/api/user'
-// import { getUserInfo } from '@/api/user'
+import { getUserInfo } from '@/api/user'
 export default {
     data() {
         return {
-            // 这里的属性名可以自定义，但最好不要这样做，一般我们会取和后端规定的传输数据的名字一样
             user: {
                 username: '',
                 password: ''
@@ -72,7 +68,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-// scss和less一样都是css预处理器，都有嵌套语法\
 .login-box {
     background: url('@/assets/login-bg.svg') no-repeat center center;
     background-size: 150%;
@@ -80,7 +75,6 @@ export default {
 }
 
 .login-card {
-    // margin: 0 auto;
     position: absolute;
     top: 50%;
     left: 50%;

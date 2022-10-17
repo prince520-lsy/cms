@@ -33,7 +33,7 @@
                             <p><span class="el-icon-question" style="color:orange"></span> 您确认退出黑马面经管理后台吗？</p>
                             <div style="text-align: right; margin: 0">
                                 <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-                                <el-button type="primary" size="mini" @click="visible = false">确定</el-button>
+                                <el-button type="primary" size="mini" @click="logout">确定</el-button>
                             </div>
 
                             <span class="el-icon-switch-button" slot="reference"></span>
@@ -49,12 +49,21 @@
     </div>
 </template>
 <script>
+import { removeToken } from '@/utils/token'
 import { getUserInfo } from '@/api/user'
+import store from '@/store'
 export default {
     data() {
         return {
             visible: false,
             user: {}
+        }
+    },
+    methods: {
+        logout() {
+            this.visible = false
+            this.$store.commit('user/remove_token')
+            this.$router.push('/login')
         }
     },
     async created() {
