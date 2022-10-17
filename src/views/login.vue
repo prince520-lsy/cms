@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div class="login-box">
         <el-card class="login-card">
@@ -7,6 +6,7 @@
                 <span>黑马面经运营后台</span>
             </template>
             <div>
+
                 <el-form label-position="top" label-width="80px" :model="user" :rules="rules" ref="form">
                     <el-form-item label="用户名" prop="username">
                         <el-input v-model="user.username"></el-input>
@@ -15,10 +15,7 @@
                         <el-input v-model="user.password"></el-input>
                     </el-form-item>
                 </el-form>
-                <!--
-          el-row表示行 ， 是elementUI提供的栅格布局中行的标签
-          这个标签可以独立使用，通常用于布局，这个标签可以支持flex布局
-         -->
+
                 <el-row type="flex" justify="center">
                     <!-- size: 设置按钮大小的属性
           type：设置按钮类型的属性，primary表示主要按钮
@@ -54,18 +51,16 @@ export default {
     },
     methods: {
         // 登录
-        login() {
+        login(formname) {
             // validate是form表单用于校验整个表单规则的方法
             this.$refs.form.validate(async (bool) => {
                 // bool值为true表示校验通过，否则校验失败!
-
                 if (bool) {
-                    // console.log(res);
                     const res = await login(this.user)
-                    this.$store.commit('user/set_Token', res.data.data.token)
-                    // console.log(78, res)
-                    // 成功跳转到首页
-                    // 失败提示用户 --- 统一响应拦截器中封装
+                    console.log(res, this);
+                    this.$store.commit('user/SET_TOKEN',
+                        res.data.data.token)
+
                 } else {
                     console.log('校验不通过')
                 }
@@ -90,13 +85,8 @@ export default {
     width: 40%;
     transform: translate(-50%, -50%);
 
-    /**
-     * 有scoped属性的情况下：
-     * 当我们设置组件内部标签的样式的时候，默认情况下是无法设置样式，
-       那怎么解决呢？
-        答：scss提供了一个“样式穿透”的语法，让我们能够设置组件内部标签的样式
-        这个样式穿透的语法就是：::v-deep 要设置的选择器
-    */
+    //样式穿透
+    //el根标签类名就是他自己的类名
     ::v-deep .el-card__header {
         background-color: #727cf5;
         text-align: center;

@@ -28,7 +28,7 @@ instance.interceptors.response.use(function (response) {
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
     console.log(error);
-    if (error.response.data.code === 400) {
+    if (error.response.data.code !== 200) {
         Message.error(error.response.data.message)
     }
     return Promise.reject(error);

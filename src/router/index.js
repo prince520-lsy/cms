@@ -9,8 +9,13 @@ const routes = [
     path: '/login',
     name: 'login',
     //按需加载，只有访问到页面才会加载
-    component: () => import('@/views/login/index.vue')
+    component: () => import('../views/login.vue')
   },
+  {
+    path: '/index',
+    name: 'index',
+    component: () => import('../views/index.vue')
+  }
 
 ]
 
