@@ -15,13 +15,13 @@ export function addArticle(data) {
 }
 
 export function delArticle(data) {
-    return request.delete('/admin/interview/remove', data)
+    return request.delete('/admin/interview/remove', { data })
 }
 
 export function getAricledetails(id) {
     return request.get('/admin/interview/show', { params: id })
 }
 
-export function updateArticle(data) {
-    return request.put('/admin/interview/update', data)
+export function updateArticle(params) {
+    return request.put('/admin/interview/update', params)
 }

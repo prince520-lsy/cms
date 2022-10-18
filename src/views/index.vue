@@ -71,7 +71,7 @@ export default {
     },
     async created() {
         const res = await getUserInfo()
-        console.log(res);
+        // console.log(res);
         Message.success('登录成功')
         this.user = res.data.data
     }

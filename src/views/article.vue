@@ -89,12 +89,14 @@ export default {
             tableData: [],
             total: 0,
             drawer: false,
+
             current: 1,
             pageSize: 10,
             article: {
                 stem: '', // 标题
                 content: '' // 内容
             },
+            previewShow: false,
             rules: {
                 stem: [
                     { required: true, message: '请输入标题', trigger: 'blur' }
@@ -109,12 +111,13 @@ export default {
         this.getarticleList()
     },
     methods: {
+
         async getarticleList() {
             let res = await articleList({
                 current: this.current,
                 pageSize: this.pageSize
             })
-            console.log(70, res);
+            // console.log(70, res);
             this.tableData = res.data.data.rows
             this.total = res.data.data.total
         },
@@ -137,15 +140,18 @@ export default {
                             id: this.article.id,
                             stem: this.article.stem,
                             content: this.article.content
+
                         })
+                        Message.success('编辑成功')
+
                     } else {
                         await addArticle(this.article)
+                        Message.success('添加成功')
 
                     }
-
                     this.getarticleList()
                     this.close()
-                    Message.success('编辑成功')
+
                 }
 
 
@@ -164,16 +170,18 @@ export default {
                 this.getarticleList()
         },
         del(id) {
+            console.log(167, id);
             this.$confirm('确定删除这条面经吗?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(async () => {
-                await delArticle(id)
+                await delArticle({ id })
                 this.$message({
                     type: 'success',
                     message: '删除成功!'
                 });
+
             }).catch(() => {
                 this.$message({
                     type: 'info',
