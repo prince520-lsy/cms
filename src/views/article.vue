@@ -181,13 +181,14 @@ export default {
                     type: 'success',
                     message: '删除成功!'
                 });
-
+                this.getarticleList()
             }).catch(() => {
                 this.$message({
                     type: 'info',
                     message: '已取消删除'
                 });
             });
+
         },
         async edit(id) {
             this.drawer = true

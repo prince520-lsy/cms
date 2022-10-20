@@ -13,9 +13,10 @@ const routes = [
   },
   {
     path: '/',
-    // name: 'index',
+    redirect: '/article',
+    name: 'index',
+
     component: Index,
-    redirect: '/dashboard',
     children: [
       {
         path: 'dashboard',
