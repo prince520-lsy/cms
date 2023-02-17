@@ -1,8 +1,8 @@
 <template>
     <div class="dashboard-page">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item>面经后台</el-breadcrumb-item>
-            <el-breadcrumb-item>数据看板</el-breadcrumb-item>
+            <el-breadcrumb-item>page backs</el-breadcrumb-item>
+            <el-breadcrumb-item>data panal</el-breadcrumb-item>
         </el-breadcrumb>
         <el-row :gutter="20">
             <el-col :span="6">
@@ -49,7 +49,7 @@
         </el-row>
     </div>
 </template>
-  
+
 <script>
 import *as echarts from 'echarts'
 export default {
@@ -92,7 +92,7 @@ export default {
     methods: {}
 }
 </script>
-  
+
 <style lang="scss" scoped>
 .dashboard-page {
     .el-breadcrumb {

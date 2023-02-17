@@ -3,71 +3,70 @@
         <el-card class="login-card">
             <!-- header是card组件提供的插槽名字 -->
             <template v-slot:header>
-                <span>黑马面经运营后台</span>
+                <span>interview Exepierance</span>
             </template>
             <div>
 
                 <el-form label-position="top" label-width="80px" :model="user" :rules="rules" ref="form">
-                    <el-form-item label="用户名" prop="username">
+                    <el-form-item label="username" prop="username">
                         <el-input v-model="user.username"></el-input>
                     </el-form-item>
-                    <el-form-item label="密码" prop="password">
+                    <el-form-item label="password" prop="password">
                         <el-input v-model="user.password"></el-input>
                     </el-form-item>
                 </el-form>
 
                 <el-row type="flex" justify="center">
-                    <el-button type="primary" size="small" @click="login">登录</el-button>
-                    <el-button size="small">重置</el-button>
+                    <el-button type="primary" size="small" @click="login">login</el-button>
+                    <el-button size="small">reset</el-button>
                 </el-row>
             </div>
         </el-card>
     </div>
 </template>
 <script>
-import { login } from '@/api/user'
-import { getUserInfo } from '@/api/user'
+import { login, getUserInfo } from '@/api/user'
+
 import { Message } from 'element-ui'
 
 export default {
-    data() {
-        return {
-            user: {
-                username: '',
-                password: ''
-            },
-            rules: {
-                username: [
+  data () {
+    return {
+      user: {
+        username: '',
+        password: ''
+      },
+      rules: {
+        username: [
 
-                    { required: true, message: '请输入用户名', trigger: 'blur' }
-                ],
-                password: [
-                    { required: true, message: '请输入密码', trigger: 'blur' }
-                ]
-            }
-        }
-    },
-
-
-    methods: {
-        // 登录
-        login(formname) {
-            // validate是form表单用于校验整个表单规则的方法
-            this.$refs.form.validate(async (bool) => {
-                // bool值为true表示校验通过，否则校验失败!
-                if (bool) {
-                    const res = await login(this.user)
-                    console.log(60, res);
-
-                    this.$store.commit('user/SET_TOKEN',
-                        res.data.data.token)
-                    this.$router.push('/')
-                } else {
-                    console.log('校验不通过')
-                }
-            })
-        }
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ]
+      }
     }
+  },
+
+  methods: {
+    // 登录
+    login (formname) {
+      // validate是form表单用于校验整个表单规则的方法
+      this.$refs.form.validate(async (bool) => {
+        // bool值为true表示校验通过，否则校验失败!
+        if (bool) {
+          const res = await login(this.user)
+          console.log(60, res)
+
+          this.$store.commit('user/SET_TOKEN',
+            res.data.data.token)
+          this.$router.push('/')
+        } else {
+          console.log('校验不通过')
+        }
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
